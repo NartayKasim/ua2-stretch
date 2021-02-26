@@ -1,18 +1,18 @@
 let formBtn = document.getElementById("close-form");
-let form = document.getElementsByClassName("form");
+let form = document.getElementsByTagName("form")[0];
+console.log(form)
 
-
-formBtn.onclick = function toggler() {
+let toggler = () => {
     if (formBtn.innerText === 'X') {
         formBtn.innerText = '+';
-        form[0].classList.toggle('hide')
-
+        form.classList.toggle('hide')
     }
     else {
-        form[0].classList.toggle('hide')
+        form.classList.toggle('hide')
         formBtn.innerText = 'X'
     }
 }
+
 
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
@@ -43,36 +43,41 @@ function validateForm() {
         emailList.push({name:nameInput, email:emailInput})
         displayThankYou()
     }
-
 }
 
-form[0].addEventListener('submit', function(event) {
+
+form.addEventListener('submit', function(event) {
     event.preventDefault()
     validateForm()
 })
 
-const formContainer = document.getElementsByClassName('form-container');
+const formContainer = document.getElementsByClassName('form-container')[0];
 
-function displayThankYou() {
-    formContainer[0].innerText = "Thank you for subscribing!";
-    setTimeout(function() {formContainer[0].style.display = 'none'}, 3000)
+let displayThankYou = () => {
+    formContainer.innerText = "Thank you for subscribing!";
+    setTimeout(removeMessage, 3000)
+}
+
+let removeMessage = () => {
+    formContainer.remove()
 }
 
 nameInput.addEventListener('change', function() {nameInput.style.border = 'none'});
 emailInput.addEventListener('change', function() {emailInput.style.border = 'none'})
 
 let cart = document.createElement('div');
-let main = document.getElementsByTagName('main');
+let main = document.getElementsByTagName('main')[0];
 
 let cartItems = 0;
 
-function addToCart() {
+// function addToCart() {
+let addToCart = () => {
     if (cartItems === 0) 
     {
         cartItems = 1;
         cart.setAttribute("class", "cart-display")
         cart.innerText = "Your Cart: 1 item"
-        main[0].appendChild(cart)
+        main.appendChild(cart)
     }
 
     else
